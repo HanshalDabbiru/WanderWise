@@ -17,6 +17,8 @@ import com.android.volley.toolbox.JsonRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.HashMap;
@@ -41,14 +43,20 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void testClick(View v) throws AuthFailureError {
+        TextView output = findViewById(R.id.output);
         String url = "https://api.yelp.com/v3/businesses/search?location='New York City'&sort_by=best_match&limit=20";
         RequestQueue queue = Volley.newRequestQueue(this);
-        TextView output = findViewById(R.id.output);
         // Request a string response from the provided URL.
         JsonObjectRequest jsonRequest = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
-                output.setText(response.toString());
+                try {
+                    JSONArray business_list = response.getJSONArray("businesses");
+                    JSONObject business = business_list.getJSONObject(0);
+                    output.setText(business.get("rating").toString());
+                } catch (JSONException e) {
+                    throw new RuntimeException(e);
+                }
             }
         }, new Response.ErrorListener() {
             @Override

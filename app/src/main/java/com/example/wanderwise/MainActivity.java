@@ -66,7 +66,6 @@ public class MainActivity extends AppCompatActivity {
                 return params;
             }
         };
-        Map<String, String> test = jsonRequest.getHeaders();
         queue.add(jsonRequest);
     }
 

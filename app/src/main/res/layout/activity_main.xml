@@ -11,29 +11,18 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="283dp"
-        android:layout_marginBottom="400dp"
+        android:layout_marginBottom="250dp"
         android:text="submit"
-        app:backgroundTint="#9C27B0"
+        app:backgroundTint="#5FD163"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
 
-    <TextView
-        android:id="@+id/output"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="176dp"
-        android:layout_marginEnd="178dp"
-        android:text="TextView"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/submit" />
-
-    <SearchView
+    <android.widget.SearchView
         android:id="@+id/input"
-        android:layout_width="0dp"
+        android:layout_width="300dp"
         android:layout_height="35dp"
         android:layout_marginStart="1dp"
         android:layout_marginTop="1dp"
@@ -41,20 +30,34 @@
         android:layout_marginBottom="1dp"
         app:layout_constraintBottom_toTopOf="@+id/submit"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.861" />
+        app:layout_constraintVertical_bias="0.816" />
 
     <TextView
         android:id="@+id/prompt"
         android:layout_width="wrap_content"
-        android:layout_height="15dp"
+        android:layout_height="25dp"
         android:text="Enter your destinaton here"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
         app:fontFamily="@font/asap_medium"
         app:layout_constraintBottom_toTopOf="@+id/input"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.843" />
+        app:layout_constraintVertical_bias="0.75" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="200dp"
+        android:layout_height="150dp"
+        app:layout_constraintBottom_toTopOf="@+id/prompt"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.559"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.466"
+        app:srcCompat="@drawable/wanderwiselogo"
+        tools:srcCompat="@drawable/wanderwiselogo" />
 </androidx.constraintlayout.widget.ConstraintLayout>

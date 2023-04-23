@@ -5,10 +5,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
-import android.widget.Toast;
-
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -16,11 +15,9 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
-
 import org.json.JSONArray;
-import org.json.JSONException;
-import org.w3c.dom.Text;
-
+import org.json.JSONException;;
+import com.squareup.picasso.Picasso;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -52,21 +49,27 @@ public class RatingsView extends AppCompatActivity {
         public String name;
         public double rating;
         public int num_ratings;
-        public String link;
+        public String pn;
         public String image;
 
-        public Business(String name, double rating, int num_ratings, String link, String image)
+        public Business(String name, double rating, int num_ratings, String pn, String image)
         {
             this.name = name;
             this.rating = rating;
             this.num_ratings = num_ratings;
-            this.link = link;
+            this.pn = pn;
             this.image = image;
         }
     }
 
     public void getUnderratedBusinesses(String parameters)
     {
+        Button b2 = findViewById(R.id.button2);
+        b2.setBackgroundColor(getResources().getColor(R.color.green));
+        b2.setTextColor(getResources().getColor(R.color.white));
+        Button o = findViewById(R.id.button);
+        o.setBackgroundColor(getResources().getColor(R.color.white));
+        o.setTextColor(getResources().getColor(R.color.red));
         String url = "https://api.yelp.com/v3/businesses/search?location=" + parameters + "&sort_by=rating&limit=20";
         RequestQueue queue = Volley.newRequestQueue(RatingsView.this);
         JsonObjectRequest jsonRequest = new JsonObjectRequest(Request.Method.GET, url, null, response ->
@@ -78,9 +81,9 @@ public class RatingsView extends AppCompatActivity {
                     String name = business_list.getJSONObject(i).getString("name");
                     double rating = Double.parseDouble(business_list.getJSONObject(i).getString("rating"));
                     int num_ratings = Integer.parseInt(business_list.getJSONObject(i).getString("review_count"));
-                    String link = business_list.getJSONObject(i).getString("url");
+                    String pn = business_list.getJSONObject(i).getString("display_phone");
                     String image = business_list.getJSONObject(i).getString("image_url");
-                    Business b = new Business(name, rating, num_ratings, link, image);
+                    Business b = new Business(name, rating, num_ratings, pn, image);
                     business_obj_list[i] = b;
                 }
                 Business[] underrated_businesses = selectUnderratedBusinesses(business_obj_list);
@@ -132,9 +135,11 @@ public class RatingsView extends AppCompatActivity {
             RatingBar rb = findViewById(ratingbar[i]);
             rb.setRating((float) underrated[i].rating);
             TextView link = findViewById(links[i]);
-            link.setText(underrated[i].link);
+            link.setText(underrated[i].pn);
             TextView rating = findViewById(ratings[i]);
             rating.setText(Integer.toString(underrated[i].num_ratings));
+            ImageView image = findViewById(images[i]);
+            Picasso.get().load(underrated[i].image).into(image);
         }
     }
 
@@ -142,6 +147,12 @@ public class RatingsView extends AppCompatActivity {
 
     public void getOverratedBusiness(String parameters)
     {
+        Button b3 = findViewById(R.id.button);
+        b3.setBackgroundColor(getResources().getColor(R.color.red));
+        b3.setTextColor(getResources().getColor(R.color.white));
+        Button o = findViewById(R.id.button2);
+        o.setBackgroundColor(getResources().getColor(R.color.white));
+        o.setTextColor(getResources().getColor(R.color.green));
         String url = "https://api.yelp.com/v3/businesses/search?location=" + parameters + "&sort_by=review_count&limit=20";
         RequestQueue queue = Volley.newRequestQueue(this);
         JsonObjectRequest jsonRequest = new JsonObjectRequest(Request.Method.GET, url, null, response ->
@@ -153,13 +164,11 @@ public class RatingsView extends AppCompatActivity {
                     String name = business_list.getJSONObject(i).getString("name");
                     double rating = Double.parseDouble(business_list.getJSONObject(i).getString("rating"));
                     int num_ratings = Integer.parseInt(business_list.getJSONObject(i).getString("review_count"));
-                    String link = business_list.getJSONObject(i).getString("url");
+                    String pn = business_list.getJSONObject(i).getString("display_phone");
                     String image = business_list.getJSONObject(i).getString("image_url");
-                    Business b = new Business(name, rating, num_ratings, link, image);
+                    Business b = new Business(name, rating, num_ratings, pn, image);
                     business_obj_list[i] = b;
                 }
-                TextView t = findViewById(R.id.name1);
-                t.setText("test plsss");
                 Business[] overrated_businesses = selectOverratedBusinesses(business_obj_list);
                 setOverratedUI(overrated_businesses);
 
@@ -202,9 +211,11 @@ public class RatingsView extends AppCompatActivity {
             RatingBar rb = findViewById(ratingbar[i]);
             rb.setRating((float) overrated[i].rating);
             TextView link = findViewById(links[i]);
-            link.setText(overrated[i].link);
+            link.setText(overrated[i].pn);
             TextView rating = findViewById(ratings[i]);
             rating.setText(Integer.toString(overrated[i].num_ratings));
+            ImageView image = findViewById(images[i]);
+            Picasso.get().load(overrated[i].image).into(image);
         }
     }
 }

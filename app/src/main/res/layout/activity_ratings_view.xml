@@ -26,25 +26,25 @@
             android:orientation="horizontal">
 
             <FrameLayout
-                android:layout_width="match_parent"
+                android:layout_width="205dp"
                 android:layout_height="match_parent">
 
                 <Button
                     android:id="@+id/button2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="75dp"
+                    android:layout_width="150dp"
+                    android:layout_height="48dp"
+                    android:layout_marginLeft="50dp"
                     android:layout_marginTop="10dp"
                     android:layout_marginRight="50dp"
                     android:layout_marginBottom="10dp"
                     android:background="@android:color/transparent"
                     android:outlineProvider="bounds"
                     android:text="Underrated"
-                    android:textColor="@android:color/holo_green_light" />
+                    android:textColor="@color/green" />
             </FrameLayout>
 
             <FrameLayout
-                android:layout_width="match_parent"
+                android:layout_width="214dp"
                 android:layout_height="match_parent">
 
                 <Button
@@ -57,7 +57,7 @@
                     android:background="@android:color/transparent"
                     android:outlineProvider="bounds"
                     android:text="Overrated"
-                    android:textColor="@android:color/holo_red_dark" />
+                    android:textColor="@color/red" />
             </FrameLayout>
 
         </LinearLayout>

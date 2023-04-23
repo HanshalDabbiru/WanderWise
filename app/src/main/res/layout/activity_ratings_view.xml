@@ -193,7 +193,7 @@
                             android:scaleY=".6" />
 
                         <TextView
-                            android:id="@+id/rating2"
+                            android:id="@+id/rating_2"
                             android:layout_width="34dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"

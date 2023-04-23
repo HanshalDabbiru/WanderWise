@@ -39,9 +39,11 @@ public class RatingsView extends AppCompatActivity {
         Intent intent = getIntent();
         String parameters = intent.getStringExtra("parameters");
         getUnderratedBusinesses(parameters);
-        getOverratedBusiness(parameters);
-        TextView t = findViewById(R.id.name1);
-        t.setText("here");
+        Button under = findViewById(R.id.button2);
+        under.setOnClickListener(v -> getUnderratedBusinesses(parameters));
+        Button over = findViewById(R.id.button);
+        over.setOnClickListener(v -> getOverratedBusiness(parameters));
+        //getOverratedBusiness(parameters);
     }
 
 
@@ -125,10 +127,6 @@ public class RatingsView extends AppCompatActivity {
         int [] ratings = {R.id.rating_1, R.id.rating_2, R.id.rating_3, R.id.rating_4, R.id.rating_5};
         for(int i = 0; i < 5; i++)
         {
-            Button b = findViewById(R.id.button);
-            b.setText("testing");
-            TextView test = findViewById(R.id.name1);
-            test.setText("why is the not working");
             TextView tv = findViewById(names[i]);
             tv.setText(underrated[i].name);
             RatingBar rb = findViewById(ratingbar[i]);
@@ -136,7 +134,7 @@ public class RatingsView extends AppCompatActivity {
             TextView link = findViewById(links[i]);
             link.setText(underrated[i].link);
             TextView rating = findViewById(ratings[i]);
-            rating.setText((int) underrated[i].rating);
+            rating.setText(Integer.toString(underrated[i].num_ratings));
         }
     }
 
@@ -199,10 +197,6 @@ public class RatingsView extends AppCompatActivity {
         int [] ratings = {R.id.rating_1, R.id.rating_2, R.id.rating_3, R.id.rating_4, R.id.rating_5};
         for(int i = 0; i < 5; i++)
         {
-            Button b = findViewById(R.id.button);
-            b.setText("testing");
-            TextView test = findViewById(R.id.name1);
-            test.setText("why is the not working");
             TextView tv = findViewById(names[i]);
             tv.setText(overrated[i].name);
             RatingBar rb = findViewById(ratingbar[i]);
@@ -210,7 +204,7 @@ public class RatingsView extends AppCompatActivity {
             TextView link = findViewById(links[i]);
             link.setText(overrated[i].link);
             TextView rating = findViewById(ratings[i]);
-            rating.setText((int) overrated[i].rating);
+            rating.setText(Integer.toString(overrated[i].num_ratings));
         }
     }
 }

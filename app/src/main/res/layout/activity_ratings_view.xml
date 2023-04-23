@@ -39,7 +39,7 @@
                     android:layout_marginBottom="10dp"
                     android:background="@android:color/transparent"
                     android:outlineProvider="bounds"
-                    android:text="Button"
+                    android:text="Underrated"
                     android:textColor="@android:color/holo_green_light" />
             </FrameLayout>
 
@@ -56,7 +56,7 @@
                     android:layout_marginBottom="10dp"
                     android:background="@android:color/transparent"
                     android:outlineProvider="bounds"
-                    android:text="Button"
+                    android:text="Overrated"
                     android:textColor="@android:color/holo_red_dark" />
             </FrameLayout>
 
